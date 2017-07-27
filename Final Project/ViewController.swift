@@ -33,17 +33,34 @@ class ViewController: UIViewController {
     }
     
     
+    
+    func append(inputString: String, type: String) -> String {
+        let n = Double(inputString)
+        let newValue = "\(n) \(type)"
+        
+        return newValue
+    }
+    
+    
     @IBAction func converterButtonWasPressed(_ sender: Any) {
         
         let alert = UIAlertController(title: "Choose Converter", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         alert.addAction(UIAlertAction(title: "fahrenheit to celcius", style: UIAlertActionStyle.default, handler: { (alertAction) in
+            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "F°")
+            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "C°")
         }))
         alert.addAction(UIAlertAction(title: "celcius to fahrenheit", style: UIAlertActionStyle.default, handler: { (alertAction) in
+            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "C°")
+            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "F°")
         }))
         alert.addAction(UIAlertAction(title: "miles to kilometers", style: UIAlertActionStyle.default, handler: { (alertAction) in
+            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "mi")
+            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "kilo")
         }))
         alert.addAction(UIAlertAction(title: "kilometers to miles", style: UIAlertActionStyle.default, handler: { (alertAction) in
+            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "kilo")
+            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "mi")
         }))
         
         present(alert, animated: true, completion: nil)
