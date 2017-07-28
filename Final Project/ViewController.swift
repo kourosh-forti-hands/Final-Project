@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var eightButton: UIButton!
@@ -26,6 +27,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var decimalButton: UIButton!
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var sourceTextField: UITextField!
+    var celsius = "C°"
+    var farenheit = "F°"
+    var miles = "mi"
+    var kilos = "km"
+    var inputValue: String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +54,9 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Choose Converter", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         alert.addAction(UIAlertAction(title: "fahrenheit to celcius", style: UIAlertActionStyle.default, handler: { (alertAction) in
-            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "F°")
-            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "C°")
+            self.sourceTextField.text = "\(self.inputValue) \(self.celsius)"
+            
+            self.destinationTextField.text = fToC(input: inputValue)
         }))
         alert.addAction(UIAlertAction(title: "celcius to fahrenheit", style: UIAlertActionStyle.default, handler: { (alertAction) in
             self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "C°")
@@ -93,6 +101,31 @@ class ViewController: UIViewController {
     @IBAction func minusButtonWasPressed(_ sender: Any) {
     }
 
+    
+    func kiloToMiles(input: String) -> String {
+        let miles = Double(input)! * 0.621371
+        
+        return "\(miles) \(milesAbrev)"
+    }
+    
+    func milesToKilos(input: String) -> String {
+        let kilo = Double(input)! * 1.609344
+        
+        return "\(kilo) \(kilosAbrev)"
+    }
+    
+    func cToF(input: String) -> String {
+        let F = Double(input)! * 1.8 + 32
+        
+        return "\(F) \(farenheitAbrev)"
+    }
+    
+    func fToC(input: String) ->String {
+        var C = Double(input)! - 32
+        C = C * 0.5556
+        
+        return "\(C) \(celsiusAbrev)"
+    }
 
 }
 
