@@ -27,10 +27,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var decimalButton: UIButton!
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var sourceTextField: UITextField!
-    var celsius = "C°"
-    var farenheit = "F°"
-    var miles = "mi"
-    var kilos = "km"
+    var celsiusAbrev = "C°"
+    var farenheitAbrev = "F°"
+    var milesAbrev = "mi"
+    var kilosAbrev = "km"
     var inputValue: String = ""
     
     
@@ -54,51 +54,72 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Choose Converter", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         alert.addAction(UIAlertAction(title: "fahrenheit to celcius", style: UIAlertActionStyle.default, handler: { (alertAction) in
-            self.sourceTextField.text = "\(self.inputValue) \(self.celsius)"
+            self.sourceTextField.text = "\(self.inputValue) \(self.farenheitAbrev)"
             
-            self.destinationTextField.text = fToC(input: inputValue)
+            self.destinationTextField.text = self.fToC(input: self.inputValue)
         }))
         alert.addAction(UIAlertAction(title: "celcius to fahrenheit", style: UIAlertActionStyle.default, handler: { (alertAction) in
-            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "C°")
-            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "F°")
+            self.sourceTextField.text = "\(self.inputValue) \(self.celsiusAbrev)"
+            
+            self.destinationTextField.text = self.cToF(input: self.inputValue)
         }))
         alert.addAction(UIAlertAction(title: "miles to kilometers", style: UIAlertActionStyle.default, handler: { (alertAction) in
-            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "mi")
-            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "kilo")
+            self.sourceTextField.text = "\(self.inputValue) \(self.milesAbrev)"
+            
+            self.destinationTextField.text = self.milesToKilos(input: self.inputValue)
         }))
         alert.addAction(UIAlertAction(title: "kilometers to miles", style: UIAlertActionStyle.default, handler: { (alertAction) in
-            self.sourceTextField.text = self.append(inputString: self.sourceTextField.text!, type: "kilo")
-            self.destinationTextField.text = self.append(inputString: self.destinationTextField.text!, type: "mi")
+            self.sourceTextField.text = "\(self.inputValue) \(self.kilosAbrev)"
+            
+            self.destinationTextField.text = self.kiloToMiles(input: self.inputValue)
         }))
         
         present(alert, animated: true, completion: nil)
     }
     
     @IBAction func decimalButtonWasPressed(_ sender: Any) {
+        inputValue += "."
     }
     @IBAction func zeroButtonWasPressed(_ sender: Any) {
+        inputValue += "0"
     }
     @IBAction func clearButtonWasPressed(_ sender: Any) {
     }
     @IBAction func nineButtonWasPressed(_ sender: Any) {
+        inputValue += "9"
     }
     @IBAction func eightButtonWasPressed(_ sender: Any) {
+        inputValue += "8"
     }
     @IBAction func sevenButtonWasPressed(_ sender: Any) {
+        inputValue += "7"
     }
     @IBAction func sixButtonWasPressed(_ sender: Any) {
+        inputValue += "6"
     }
     @IBAction func fiveButtonWasPressed(_ sender: Any) {
+        inputValue += "5"
     }
     @IBAction func fourButtonWasPressed(_ sender: Any) {
+        inputValue += "4"
     }
     @IBAction func threeButtonWasPressed(_ sender: Any) {
+        inputValue += "3"
     }
     @IBAction func twoButtonWasPressed(_ sender: Any) {
+        inputValue += "2"
     }
     @IBAction func oneButtonWasPressed(_ sender: Any) {
+        inputValue += "1"
     }
     @IBAction func minusButtonWasPressed(_ sender: Any) {
+        if inputValue.range(of:"-") != nil {
+            //Set Input
+            inputValue.remove(at: inputValue.startIndex)
+        } else {
+            //Set Input
+            inputValue.insert("-", at: inputValue.startIndex)
+        }
     }
 
     
